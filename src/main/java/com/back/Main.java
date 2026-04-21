@@ -52,20 +52,21 @@ public class Main {
                 String[] parts = cmd.split("=");
                 int deleteId = Integer.parseInt(parts[1]);
 
-                Quote found = null;
+                boolean isFound = false;
 
-                for (Quote wiseSaying : quotes) {
-                    if (wiseSaying.id == deleteId) {
-                        found = wiseSaying;
+                for (int i = 0; i < quotes.size(); i++) {
+                    Quote quote = quotes.get(i);
+                    if (quote.id == deleteId) {
+                        quotes.remove(i);
+                        isFound = true;
                         break;
                     }
                 }
 
-                if (found == null) {
-                    System.out.println(deleteId + "번 명언은 존재하지 않습니다.");
-                } else {
-                    quotes.remove(found);
+                if (isFound) {
                     System.out.println(deleteId + "번 명언이 삭제되었습니다.");
+                } else {
+                    System.out.println(deleteId + "번 명언은 존재하지 않습니다.");
                 }
 
             } else if (cmd.startsWith("수정?id=")) {
@@ -74,9 +75,10 @@ public class Main {
 
                 Quote found = null;
 
-                for (Quote wiseSaying : quotes) {
-                    if (wiseSaying.id == editId) {
-                        found = wiseSaying;
+                for (int i = 0; i < quotes.size(); i++) {
+                    Quote quote = quotes.get(i);
+                    if (quote.id == editId) {
+                        found = quote;
                         break;
                     }
                 }
